@@ -216,9 +216,16 @@ projectcreate
    ```
 
 
+#### `@RestController` とは
+
+- `@RestController` アノテーションは、Spring Framework において RESTful Web サービスのコントローラークラスを示すために使用される
+- クライアントからの HTTP リクエストを受け取り、適切なサービスメソッドを呼び出してレスポンスを生成する役割を果たす
+
+
 #### DI(Dependency Injection)について
 
 - `@Autowired` アノテーションを使用して、Spring コンテナから `CalcAgeService` のインスタンスを自動的に注入
+    - これを依存性注入(Dependency Injection, DI)と呼ぶ
 - これにより Spring が管理する Bean として `CalcAgeService` を利用できるようになる
 - `CalcAgeService` のインスタンスは、Spring が管理するため、コード内で直接インスタンス化する必要がない
 - また、DI により、テスト時にモックオブジェクトを注入することも容易になる
@@ -252,7 +259,7 @@ Spring が管理する Bean† 工場からインスタンスを貰い受けて�
 - `@Service` アノテーションを使用することで、`CalcAgeService` クラスが Spring の Bean として登録される
 - これにより、他のクラスから `CalcAgeService` を注入して利用できるようになる
 - Spring はアプリケーションの起動時に Bean をスキャンし、必要に応じてインスタンスを生成・管理する
-- `@Controller`、`@Repository`、`@Component` などのアノテーションも同様に Bean を定義する(Spring Boot にインスタンスを管理してもらう)ために使用される
+- `@Controller`、`@Repository`、`@Component` などのアノテーションも同様に Bean を定義する(Spring にインスタンスを管理してもらう)ために使用される
 
 
 ## プロジェクトの実行
