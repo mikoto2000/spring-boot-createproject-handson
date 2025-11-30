@@ -271,7 +271,111 @@ Spring が管理する Bean† 工場からインスタンスを貰い受けて�
    ```
 3. ブラウザまたは curl コマンドでエンドポイントにアクセス
    ```bash
-   curl "http://localhost:8080/api/calc-age?birthDay=1990-01-01
+   curl "http://localhost:8080/api/calc-age?birthDay=1990-01-01"
    => {"age":125}
    ```
+
+
+# アプリケーションの設定
+
+## `application.yaml` の作成
+
+1. `src/main/resources` ディレクトリから `application.properties` を削除し、 `application.yaml` ファイルを作成
+2. 以下のコードを `application.yaml` に追加
+   ```yaml
+   server:
+      port: ${CREATEPROJECT_SERVER_PORT:8080}
+   spring:
+    profiles:
+      active: local
+      group:
+        local:
+          - dev-logging
+        prod:
+          - prod-logging
+   ```
+3. 以下のコードを `application-dev-logging.yaml` に追加
+   ```yaml
+   logging:
+     level:
+        root: DEBUG
+   ```
+4. 以下のコードを `application-prod-logging.yaml` に追加
+   ```yaml
+   logging:
+     level:
+        root: WARN
+   ```
+
+これにより、 `src/main/resources` ディレクトリの構成は以下のようになります。
+
+```
+src
+ └── main
+     └── resources
+         ├── application.yaml
+         ├── application-dev-logging.yaml
+         └── application-prod-logging.yaml
+```
+
+## プロファイルの切り替え
+
+プロファイルが `active: local` と設定されているため、デフォルトではアプリケーション起動時に `application-dev-logging.yaml` の設定が適用され、ログレベルが `DEBUG` に設定される。
+起動時に、例えば `prod` プロファイルを指定すると、 `application-prod-logging.yaml` の設定が適用され、ログレベルが `WARN` に設定される。
+
+
+## 環境変数の利用
+
+`application.yaml` で `server.port` が `${CREATEPROJECT_SERVER_PORT:8080}` と設定されているため、環境変数 `CREATEPROJECT_SERVER_PORT` が設定されていればその値がポート番号として使用され、設定されていなければデフォルトで `8080` が使用される。
+
+
+## まとめ
+
+このように、Spring Boot では `application.yaml` を使用してアプリケーションの設定を柔軟に管理できる。
+プロファイルを活用することで、開発環境と本番環境で異なる設定を簡単に切り替えることができる。
+また、環境変数を利用することで、デプロイ先の環境に応じた設定を動的に変更することが可能となる。
+
+db やクラウドのエンドポイントなど、環境ごとに異なる設定が必要な場合に特に有用である。
+
+例えば、以下のように環境依存の要素ごとにファイルを分けることもできる。
+
+```src
+ └── main
+     └── resources
+         ├── application.yaml
+         ├── application-dev-logging.yaml
+         ├── application-prod-logging.yaml
+         ├── application-dev-db.yaml
+         └── application-prod-db.yaml
+```
+
+
+# アプリケーションのビルドとデプロイ
+
+1. ターミナルを開き、プロジェクトのルートディレクトリに移動
+2. 以下のコマンドを実行してアプリケーションをビルド
+    ```bash
+    ./mvnw clean package
+    ```
+3. ビルドが成功すると、 `target` ディレクトリに `projectcreate-0.0.1-SNAPSHOT.jar` ファイルが生成される
+4. 以下のコマンドを実行してアプリケーションを起動(デフォルトプロファイル(local))
+    ```bash
+    java -jar target/projectcreate-0.0.1-SNAPSHOT.jar
+    ```
+5. ブラウザまたは curl コマンドでエンドポイントにアクセス
+    ```bash
+    curl "http://localhost:8080/api/calc-age?birthDay=1990-01-01"
+    => {"age":125}
+    ```
+
+プロファイルを指定して起動する場合は、以下のように `--spring.profiles.active` オプションを使用する。
+
+```bash
+java -jar target/projectcreate-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
+```
+
+これにより、 `prod` プロファイルが有効になり、 `application-prod-logging.yaml` の設定が適用される。
+
+`local` で起動した場合と、 `prod` で起動した場合で、ログレベルが異なることを確認できる。
+
 
