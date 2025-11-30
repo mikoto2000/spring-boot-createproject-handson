@@ -174,6 +174,37 @@ projectcreate
    ```
 
 
+#### DI(Dependency Injection)について
+
+- `@Autowired` アノテーションを使用して、Spring コンテナから `CalcAgeService` のインスタンスを自動的に注入
+- これにより Spring が管理する Bean として `CalcAgeService` を利用できるようになる
+- `CalcAgeService` のインスタンスは、Spring が管理するため、コード内で直接インスタンス化する必要がない
+- また、DI により、テスト時にモックオブジェクトを注入することも容易になる
+
+Spring が管理する Bean 工場からインスタンスを貰い受けて利用するイメージ。
+
+
+##### ステップアップ Tips
+
+- コンストラクタの `@Autowired` は省略可能
+- Lombok の `@RequiredArgsConstructor` と組み合わせるとさらにコードを簡潔にできる
+   ```java
+   ...(snip)
+   @RestController
+   @RequestMapping("/api/calc-age")
+   @RequiredArgsConstructor // private final フィールドにに代入するコンストラクタを自動生成
+   public class CalcAgeController {
+
+     private final CalcAgeService calcAgeService;
+
+     @GetMapping("/calc-age")
+     public CalcAgeResponse calculateAge(@RequestParam("birthDay") LocalDate birthDay) {
+   ...(snip)
+   ```
+
+
+
+
 ### 3. コントローラークラスの作成
 
 1. `src/main/java/dev/mikoto2000/workshop/projectcreate/calcage/controller` ディレクトリに `CalcAgeController.java` ファイルを作成
