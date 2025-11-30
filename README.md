@@ -189,16 +189,14 @@ projectcreate
    import java.time.LocalDate;
    import java.time.format.DateTimeParseException;
 
+   import lombok.RequiredArgsConstructor;
+
    @RestController
    @RequestMapping("/api/calc-age")
+   @RequiredArgsConstructor
    public class CalcAgeController {
 
         private final CalcAgeService calcAgeService;
-
-        @Autowired
-        public CalcAgeController(CalcAgeService calcAgeService) {
-             this.calcAgeService = calcAgeService;
-        }
 
         @GetMapping
         public CalcAgeResponse calculateAge(@RequestParam("birthDay") String birthDay) {
@@ -224,6 +222,6 @@ projectcreate
 3. ブラウザまたは curl コマンドでエンドポイントにアクセス
    ```bash
    curl "http://localhost:8080/api/calc-age?birthDay=1990-01-01
+   => {"age":125}
    ```
-
 

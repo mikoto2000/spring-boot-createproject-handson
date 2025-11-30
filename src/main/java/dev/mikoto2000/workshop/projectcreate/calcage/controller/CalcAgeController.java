@@ -11,16 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/api/calc-age")
+@RequiredArgsConstructor
 public class CalcAgeController {
 
      private final CalcAgeService calcAgeService;
-
-     @Autowired
-     public CalcAgeController(CalcAgeService calcAgeService) {
-          this.calcAgeService = calcAgeService;
-     }
 
      @GetMapping
      public CalcAgeResponse calculateAge(@RequestParam("birthDay") String birthDay) {
@@ -33,4 +31,3 @@ public class CalcAgeController {
           }
      }
 }
-
