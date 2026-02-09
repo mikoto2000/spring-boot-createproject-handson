@@ -37,15 +37,16 @@ JSON を返却するミニマムな API を例に、プロジェクト構成・�
 
 1. [Spring Initializr](https://start.spring.io/) にアクセス
 2. 以下のように設定して「Generate」をクリック
-    - Project: Maven Project
+    - Project: Maven
     - Language: Java
-    - Spring Boot: 4.0.0 (最新安定版)
+    - Spring Boot: 4.0.2 (最新安定版)
     - Project Metadata
         - Group: dev.mikoto2000.workshop
         - Artifact: projectcreate
         - Name: projectcreate
         - Package name: dev.mikoto2000.workshop.projectcreate
         - Packaging: Jar
+        - Configuration: YAML
         - Java: 21
     - Dependencies:
         - Spring Web
