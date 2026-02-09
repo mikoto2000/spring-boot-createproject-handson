@@ -89,8 +89,7 @@ projectcreate
 ├── .gitignore
 ├── mvnw
 ├── mvnw.cmd
-├── pom.xml
-└── README.md
+└── pom.xml
 ```
 
 
