@@ -36,7 +36,7 @@ JSON を返却するミニマムな API を例に、プロジェクト構成・�
 # プロジェクトの作成
 
 1. [Spring Initializr](https://start.spring.io/) にアクセス
-2. 以下のように設定して「Generate」をクリック
+2. 次のように設定して「Generate」をクリック
     - Project: Maven
     - Language: Java
     - Spring Boot: 4.0.2 (最新安定版)
@@ -64,7 +64,7 @@ JSON を返却するミニマムな API を例に、プロジェクト構成・�
 
 ## プロジェクトの構成
 
-プロジェクトのディレクトリ構成は以下のようになります。
+プロジェクトのディレクトリ構成は次のようになります。
 
 ```
 projectcreate
@@ -120,7 +120,7 @@ projectcreate
 ### 1. DTO の作成
 
 1. `src/main/java/dev/mikoto2000/workshop/projectcreate/calcage/dto` ディレクトリに `CalcAgeResponse.java` ファイルを作成
-2. 以下のコードを `CalcAgeResponse.java` に追加
+2. 次のコードを `CalcAgeResponse.java` に追加
    ```java
    package dev.mikoto2000.workshop.projectcreate.calcage.dto;
 
@@ -140,7 +140,7 @@ projectcreate
 ### 2. Service クラスの作成
 
 1. `src/main/java/dev/mikoto2000/workshop/projectcreate/calcage/service` ディレクトリに `CalcAgeService.java` ファイルを作成
-2. 以下のコードを `CalcAgeService.java` に追加
+2. 次のコードを `CalcAgeService.java` に追加
    ```java
    package dev.mikoto2000.workshop.projectcreate.calcage.service;
 
@@ -191,7 +191,7 @@ projectcreate
 ### 3. コントローラークラスの作成
 
 1. `src/main/java/dev/mikoto2000/workshop/projectcreate/calcage/controller` ディレクトリに `CalcAgeController.java` ファイルを作成
-2. 以下のコードを `CalcAgeController.java` に追加
+2. 次のコードを `CalcAgeController.java` に追加
    ```java
    package dev.mikoto2000.workshop.projectcreate.calcage.controller;
 
@@ -232,7 +232,7 @@ projectcreate
 
 #### DI(Dependency Injection)について
 
-- 以下条件がそろっているため、 Spring コンテナから コンストラクタの引数へ `CalcAgeService` のインスタンスが自動的に注入される。これを依存性注入(Dependency Injection, DI)と呼ぶ
+- 次の条件がそろっているため、 Spring コンテナから コンストラクタの引数へ `CalcAgeService` のインスタンスが自動的に注入される。これを依存性注入(Dependency Injection, DI)と呼ぶ
     - フィールドが `private final`
     - コンストラクタ引数に同型の引数が存在する
 - これにより Spring が管理する Bean として `CalcAgeService` を利用できるようになる
@@ -245,7 +245,7 @@ Spring が管理する Bean 工場からインスタンスを貰い受けて利�
 ## プロジェクトの実行
 
 1. ターミナルを開き、プロジェクトのルートディレクトリに移動
-2. 以下のコマンドを実行してアプリケーションを起動
+2. 次のコマンドを実行してアプリケーションを起動
    ```bash
    ./mvnw spring-boot:run
    ```
@@ -268,7 +268,7 @@ Spring が管理する Bean 工場からインスタンスを貰い受けて利�
 ## `application.yaml` の作成
 
 1. `src/main/resources/application.yaml` ファイルを開く
-2. 以下のコードを `application.yaml` に追加
+2. 次のコードを `application.yaml` に追加
    ```yaml
    server:
      port: ${CREATEPROJECT_SERVER_PORT:8080}
@@ -281,20 +281,20 @@ Spring が管理する Bean 工場からインスタンスを貰い受けて利�
          prod:
            - prod-logging
    ```
-3. 以下のコードを `application-local-logging.yaml` に追加
+3. 次のコードを `application-local-logging.yaml` に追加
    ```yaml
    logging:
      level:
         root: DEBUG
    ```
-4. 以下のコードを `application-prod-logging.yaml` に追加
+4. 次のコードを `application-prod-logging.yaml` に追加
    ```yaml
    logging:
      level:
         root: INFO
    ```
 
-これにより、 `src/main/resources` ディレクトリの構成は以下のようになります。
+これにより、 `src/main/resources` ディレクトリの構成は次のようになります。
 
 ```
 src
@@ -326,7 +326,7 @@ src
 
 DB やクラウドのエンドポイントなど、環境ごとに異なる設定が必要な場合に特に有用です。
 
-例えば、以下のように環境依存の要素ごとにファイルを分けることもできる。
+例えば、次のように環境依存の要素ごとにファイルを分けることもできる。
 
 ```src
  └── main
@@ -342,12 +342,12 @@ DB やクラウドのエンドポイントなど、環境ごとに異なる設�
 # アプリケーションのビルドとデプロイ
 
 1. ターミナルを開き、プロジェクトのルートディレクトリに移動
-2. 以下のコマンドを実行してアプリケーションをビルド
+2. 次のコマンドを実行してアプリケーションをビルド
     ```bash
     ./mvnw clean package
     ```
 3. ビルドが成功すると、 `target` ディレクトリに `projectcreate-0.0.1-SNAPSHOT.jar` ファイルが生成される
-4. 以下のコマンドを実行してアプリケーションを起動(デフォルトプロファイル(local))
+4. 次のコマンドを実行してアプリケーションを起動(デフォルトプロファイル(local))
     ```bash
     java -jar target/projectcreate-0.0.1-SNAPSHOT.jar
     ```
@@ -357,7 +357,7 @@ DB やクラウドのエンドポイントなど、環境ごとに異なる設�
     => {"age":125}
     ```
 
-プロファイルを指定して起動する場合は、以下のように `--spring.profiles.active` オプションを使用する。
+プロファイルを指定して起動する場合は、次のように `--spring.profiles.active` オプションを使用する。
 
 ```bash
 java -jar target/projectcreate-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod
