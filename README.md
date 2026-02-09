@@ -258,6 +258,13 @@ Spring が管理する Bean 工場からインスタンスを貰い受けて利�
 
 # アプリケーションの設定
 
+これからアプリケーションの設定を行っていきます。
+次の挙動ができるように設定ファイルを記述します。
+
+- 待ち受けポートはデフォルト 8080, 環境変数があればその値で上書き
+- ローカル環境ではログレベル DEBUG
+- プロダクション環境ではログレベル INFO
+
 ## `application.yaml` の作成
 
 1. `src/main/resources/application.yaml` ファイルを開く
@@ -284,7 +291,7 @@ Spring が管理する Bean 工場からインスタンスを貰い受けて利�
    ```yaml
    logging:
      level:
-        root: WARN
+        root: INFO
    ```
 
 これにより、 `src/main/resources` ディレクトリの構成は以下のようになります。
@@ -298,10 +305,12 @@ src
          └── application-prod-logging.yaml
 ```
 
-## プロファイルの切り替え
+## プロファイルの切り替えについて
 
 プロファイルが `active: local` と設定されているため、デフォルトではアプリケーション起動時に `application-local-logging.yaml` の設定が適用され、ログレベルが `DEBUG` に設定される。
-起動時に、例えば `prod` プロファイルを指定すると、 `application-prod-logging.yaml` の設定が適用され、ログレベルが `WARN` に設定される。
+起動時に、例えば `prod` プロファイルを指定すると、 `application-prod-logging.yaml` の設定が適用され、ログレベルが `INFO` に設定される。
+
+実際に切り替える方法は、次の章の動作確認で説明します。
 
 
 ## 環境変数の利用
@@ -309,7 +318,7 @@ src
 `application.yaml` で `server.port` が `${CREATEPROJECT_SERVER_PORT:8080}` と設定されているため、環境変数 `CREATEPROJECT_SERVER_PORT` が設定されていればその値がポート番号として使用され、設定されていなければデフォルトで `8080` が使用される。
 
 
-## まとめ
+## アプリケーション設定のまとめ
 
 このように、Spring Boot では `application.yaml` を使用してアプリケーションの設定を柔軟に管理できる。
 プロファイルを活用することで、開発環境と本番環境で異なる設定を簡単に切り替えることができる。
