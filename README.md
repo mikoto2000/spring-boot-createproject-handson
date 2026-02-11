@@ -14,7 +14,7 @@ JSON を返却するミニマムな API を例に、プロジェクト構成・�
 - シンプルな API の実装
     - DI について
     - bean について
-    - Controller -> Service -> Util と呼び出す API 構成
+    - Controller -> Service と呼び出す API 構成
 - application.yaml の機能いろいろ
     - プロファイル
     - 環境変数読み込み
